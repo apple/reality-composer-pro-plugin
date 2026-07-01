@@ -16,10 +16,10 @@ import PackageDescription
 let package = Package(
     name: "RealityComposerPro",
     platforms: [
-        .iOS(.v18),
-        .macOS(.v15),
-        .tvOS(.v18),
-        .visionOS(.v2)
+        .iOS(.v26),
+        .macOS(.v26),
+        .tvOS(.v26),
+        .visionOS(.v26)
     ],
     products: [
         .library(

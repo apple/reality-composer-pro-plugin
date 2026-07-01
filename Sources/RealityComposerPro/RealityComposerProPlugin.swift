@@ -15,7 +15,7 @@ import RealityKit
 ///
 /// Use the context during plugin setup to register your custom RealityKit components, entity actions,
 /// and systems with Reality Composer Pro.
-@available(macOS 26.4, iOS 27.0, visionOS 27.0, tvOS 27.0, *)
+@available(macOS 26, iOS 26, visionOS 26, tvOS 26, *)
 public protocol RealityComposerProContext {
     /// Registers a custom component type with Reality Composer Pro.
     ///
@@ -47,7 +47,7 @@ public protocol RealityComposerProContext {
 /// types, and optionally implement ``shutdown()`` to perform cleanup when unloading.
 ///
 /// For Reality Composer Pro to discover your plugin, you must define a public
-/// `@_cdecl("createRealityComposerProPlugin")` function that returns the plugin instance
+/// `@c("createRealityComposerProPlugin")` function that returns the plugin instance
 /// via ``passRetained()``:
 ///
 /// ```swift
@@ -58,12 +58,12 @@ public protocol RealityComposerProContext {
 ///     }
 /// }
 ///
-/// @_cdecl("createRealityComposerProPlugin")
+/// @c("createRealityComposerProPlugin")
 /// public func createRealityComposerProPlugin() -> UnsafeMutableRawPointer {
 ///     CustomComponentsPlugin().passRetained()
 /// }
 /// ```
-@available(macOS 26.4, iOS 27.0, visionOS 27.0, tvOS 27.0, *)
+@available(macOS 26, iOS 26, visionOS 26, tvOS 26, *)
 public protocol RealityComposerProPlugin: AnyObject {
     /// Performs setup when Reality Composer Pro loads the plugin.
     ///
@@ -79,14 +79,14 @@ public protocol RealityComposerProPlugin: AnyObject {
     func shutdown()
 }
 
-@available(macOS 26.4, iOS 27.0, visionOS 27.0, tvOS 27.0, *)
+@available(macOS 26, iOS 26, visionOS 26, tvOS 26, *)
 extension RealityComposerProPlugin {
     /// Provides a default no-op implementation for plugins that don't need cleanup.
     public func shutdown() {}
 
     /// Creates a C-compatible opaque pointer from this plugin instance.
     ///
-    /// Use this in your `@_cdecl("createRealityComposerProPlugin")` function to return the plugin instance
+    /// Use this in your `@c("createRealityComposerProPlugin")` function to return the plugin instance
     /// to the host application.
     ///
     /// - Returns: An opaque pointer suitable for returning from `createRealityComposerProPlugin()`.
@@ -98,7 +98,7 @@ extension RealityComposerProPlugin {
 /// A wrapper that carries a ``RealityComposerProPlugin`` instance through a C-compatible opaque pointer.
 ///
 /// Don't use this type directly; it's an implementation detail of ``RealityComposerProPlugin/passRetained()``.
-@available(macOS 26.4, iOS 27.0, visionOS 27.0, tvOS 27.0, *)
+@available(macOS 26, iOS 26, visionOS 26, tvOS 26, *)
 public final class _RealityComposerProPluginBox {
     /// The boxed plugin instance.
     public let plugin: any RealityComposerProPlugin
@@ -109,10 +109,10 @@ public final class _RealityComposerProPluginBox {
 }
 
 /// Reality Composer Pro editor-state detection on `Scene`.
-@available(macOS 26.4, iOS 27.0, visionOS 27.0, tvOS 27.0, *)
+@available(macOS 26, iOS 26, visionOS 26, tvOS 26, *)
 extension Scene {
     /// Represents the editor state of a ``Scene``.
-    public enum EditorState: String {
+    @nonexhaustive public enum EditorState: String {
         /// The user's app owns this hierarchy, not the editor.
         case none = ""
         /// This hierarchy lives in an editor Viewport where simulations aren't running.
